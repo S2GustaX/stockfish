@@ -1,0 +1,41 @@
+name: ChessTrainer
+options:
+  bundleIdPrefix: com.example
+settings:
+  base:
+    SWIFT_VERSION: '5.9'
+    IPHONEOS_DEPLOYMENT_TARGET: '17.0'
+    TARGETED_DEVICE_FAMILY: '1'
+    DEVELOPMENT_TEAM: ''
+targets:
+  ChessTrainer:
+    type: application
+    platform: iOS
+    sources:
+      - path: iOS/App
+        excludes:
+          - Info.plist
+          - ChessTrainer.entitlements
+      - path: iOS/Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.chesstrainer
+        INFOPLIST_FILE: iOS/App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: iOS/App/ChessTrainer.entitlements
+    dependencies:
+      - target: BroadcastExtension
+        embed: true
+  BroadcastExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: iOS/Broadcast
+        excludes:
+          - Info.plist
+          - BroadcastExtension.entitlements
+      - path: iOS/Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.chesstrainer.broadcast
+        INFOPLIST_FILE: iOS/Broadcast/Info.plist
+        CODE_SIGN_ENTITLEMENTS: iOS/Broadcast/BroadcastExtension.entitlements
